@@ -1,0 +1,54 @@
+<html ng-app="myApp">
+  <head>
+    <link rel="icon" href="dolt_logo.png" />
+    <title>Dolt</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href='main.css'>
+    <script src='main.js'></script>
+  </head>
+  <body>
+    <div class='container row'>
+      <div class='col s12'>
+        <h1 class='title'><img id='image_logo' src='dolt_logo.svg'>Dolt</h1>
+      </div>
+    </div>
+    <div class='container'>
+      <div id='pendentes'>
+        <h2> Tarefas Pendentes <a href='#modal1'><i class="material-icons">add</i></a><hr></h2>
+        
+
+<!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <form method="POST" action="/new-task">
+          <div class="modal-content row">
+            <h4 class='modal-title'>Nova Tarefa</h4>
+            <div class="input-field col s12">
+              <input id='task-name' type='text' class='validate'>
+              <label id="task-name-label" for="task-name">Tarefa</label>
+            </div><!--
+            <div class="input-field col s6">
+                <input id='task-date' type="text" placeholder="dd/mm/aaaa" class='validate'>
+                <label id="task-date-label" for="task-date">Data</label>
+            </div>-->
+          </div>
+          <div class="modal-footer" style='background-color: white'>
+            <button id='btn-cadastrar' class="btn waves-effect waves-light" type="submit">Adicionar
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </form>
+      </div>
+<!-- End of Modal-->
+
+
+      </div>
+      <div id='completados'>
+        <h2> Tarefas Completadas<hr></h2>
+      </div>
+    </div>
+  </body>
+</html>

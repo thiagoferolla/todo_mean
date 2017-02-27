@@ -1,0 +1,43 @@
+*, #btn-cadastrar{
+  background-color: #ff1744;
+  color: white;
+  font-family: Roboto, sans-serif;;
+}
+
+.title{
+  text-align: center;
+  font-size: 380%;
+}
+
+label{
+  color: white;
+}
+
+#image_logo{
+  width: 43px;
+}
+
+h2{
+  font-size: 200%;
+}
+
+#login_div{
+  position: relative;
+  left: 15%;
+  width: 70%;
+  height: 100%;
+}
+
+.modal, #task-name, #task-name-label, #task-date-label, .input-field, .modal-footer, .modal-content, .modal-title{
+  background-color: white;
+  color: #ff1744;
+}
+
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #ff1744;
+  box-shadow: 0 1px 0 0 #ff1744;
+}
+
+#modal-content{
+  overflow: visible;
+}
