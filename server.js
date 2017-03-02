@@ -40,6 +40,7 @@ app.get('/login', (req,res)=>{
   res.sendFile(__dirname+'/views/login.html');
 })
 
-app.post('/new-task', (req,res)=>{
+app.post('/', (req,res)=>{
     console.log(req.body);
 })
+

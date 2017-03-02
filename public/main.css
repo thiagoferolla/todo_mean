@@ -41,3 +41,15 @@ h2{
 #modal-content{
   overflow: visible;
 }
+
+h3{
+  font-size: 120%;
+}
+
+h4{
+  font-size: 85%;
+}
+
+#test23{
+  font-size: 150%;
+}

@@ -16,36 +16,45 @@
         <h1 class='title'><img id='image_logo' src='dolt_logo.svg'>Dolt</h1>
       </div>
     </div>
-    <div class='container'>
-      <div id='pendentes'>
+    <div class='container row'>
+      <div id='pendentes' ng-controller="pendentes">
         <h2> Tarefas Pendentes <a href='#modal1'><i class="material-icons">add</i></a><hr></h2>
-        
+        <div class='tasklist'>
+          <form class=task>
+            <div>
+              <div>
+                <input type="checkbox" id="test6"/>
+                <label for="test6" class="task-label"><span id='test23'>{{task.name}}</span></label>
+              </div>
+              <div>
+                <h4>{{task.date}}</h4>
+              </div>
+            </div>
+          </form>
+        </div>
 
 <!-- Modal Structure -->
-      <div id="modal1" class="modal">
-        <form method="POST" action="/new-task">
-          <div class="modal-content row">
-            <h4 class='modal-title'>Nova Tarefa</h4>
-            <div class="input-field col s12">
-              <input id='task-name' type='text' class='validate'>
-              <label id="task-name-label" for="task-name">Tarefa</label>
-            </div><!--
-            <div class="input-field col s6">
-                <input id='task-date' type="text" placeholder="dd/mm/aaaa" class='validate'>
-                <label id="task-date-label" for="task-date">Data</label>
-            </div>-->
-          </div>
-          <div class="modal-footer" style='background-color: white'>
-            <button id='btn-cadastrar' class="btn waves-effect waves-light" type="submit">Adicionar
-              <i class="material-icons right">send</i>
-            </button>
-          </div>
-        </form>
-      </div>
+        <div id="modal1" class="modal" ng-controller="modal" style='overflow-x: hidden'>
+          <form id='newtaskform' method="POST" style='background-color: white'>
+            <div class="modal-content row">
+              <h4 class='modal-title'>Adicionar Tarefa</h4>
+              <div class="input-field col s12">
+                <input id='task-name' type='text' class='validate' name='taskName' ng-model="task-name">
+                <label id="task-name-label" for="task-name">Tarefa</label>
+              </div><
+              <div class="input-field col s6">
+                  <input id='task-date' type="text" placeholder="dd/mm/aaaa" class='validate' name='taskDate' ng-model="task-date">
+                  <label id="task-date-label" for="task-date">Data</label>
+              </div>
+            </div>
+            <div class="modal-footer" style='background-color: white'>
+              <button id='btn-cadastrar' class="btn waves-effect waves-light modal-close" type="submit" onclick="onclick()">Adicionar
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
+          </form>
+        </div>
 <!-- End of Modal-->
-
-
-      </div>
       <div id='completados'>
         <h2> Tarefas Completadas<hr></h2>
       </div>
