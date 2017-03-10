@@ -13,50 +13,60 @@
   <body>
     <div class='container row'>
       <div class='col s12'>
-        <h1 class='title'><img id='image_logo' src='dolt_logo.svg'>Dolt</h1>
+        <!--<h1 class='title'><img id='image_logo' src='dolt_logo.svg'>Dolt</h1>-->
       </div>
     </div>
-    <div class='container row'>
-      <div id='pendentes' ng-controller="pendentes">
-        <h2> Tarefas Pendentes <a href='#modal1'><i class="material-icons">add</i></a><hr></h2>
-        <div class='tasklist'>
-          <form class=task>
-            <div>
-              <div>
-                <input type="checkbox" id="test6"/>
-                <label for="test6" class="task-label"><span id='test23'>{{task.name}}</span></label>
-              </div>
-              <div>
-                <h4>{{task.date}}</h4>
+    <div class='container row' ng-controller="tasks">
+      <div id='pendentes'>
+        <h2> Tarefas Pendentes <a href='#modal1'><i class="material-icons" style="color: white;">add</i></a><hr></h2>
+        <div class='tasklist row' >
+            <div ng-repeat="task in pendingtasks" class="col s12 m12">
+              <div class="card white-card">    
+                <div>
+                  <input ng-click="complete(task)" type="checkbox" id={{task._id}} ng/>
+                  <label for={{task._id}} class="task-label"><span id='taskname'>{{task.name}}</span></label>
+                  <i class="material-icons" ng-click="delete(task)" style="cursor: pointer;">delete</i>
+                </div>
+                <div>
+                  <h4>{{task.date}}</h4>
+                </div>
               </div>
             </div>
-          </form>
         </div>
-
-<!-- Modal Structure -->
+        <modal id="modaltest" title="TestandooModal"></modal>
+<!-- Modal Structure
         <div id="modal1" class="modal" ng-controller="modal" style='overflow-x: hidden'>
-          <form id='newtaskform' method="POST" style='background-color: white'>
+          <form id='newtaskform' method="POST" style='background-color: white' ng-submit="submitForm()">
             <div class="modal-content row">
               <h4 class='modal-title'>Adicionar Tarefa</h4>
               <div class="input-field col s12">
-                <input id='task-name' type='text' class='validate' name='taskName' ng-model="task-name">
+                <input id='task-name' type='text' class='validate' name='taskName' ng-model="task.name">
                 <label id="task-name-label" for="task-name">Tarefa</label>
-              </div><
-              <div class="input-field col s6">
-                  <input id='task-date' type="text" placeholder="dd/mm/aaaa" class='validate' name='taskDate' ng-model="task-date">
-                  <label id="task-date-label" for="task-date">Data</label>
               </div>
-            </div>
+              <div class="input-field col s6">
+                <input id='task-date' type="text" placeholder="dd/mm/aaaa" class='validate' name='taskDate' ng-model="task.date">
+                <label id="task-date-label" for="task-date">Data</label>
+              </div>
+          </div>
             <div class="modal-footer" style='background-color: white'>
-              <button id='btn-cadastrar' class="btn waves-effect waves-light modal-close" type="submit" onclick="onclick()">Adicionar
+              <button id='btn-cadastrar' class="btn waves-effect waves-light modal-close" type="submit">Adicionar
                 <i class="material-icons right">send</i>
               </button>
             </div>
           </form>
         </div>
-<!-- End of Modal-->
+          
+ End of Modal-->
+
       <div id='completados'>
         <h2> Tarefas Completadas<hr></h2>
+          <div class="tasklist row">
+            <div ng-repeat="task in completedtasks" class="col s12 m12">
+              <div class="card white-card">
+                <h3 id="taskname">{{task.name}}</h3>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   </body>

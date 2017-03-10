@@ -4,6 +4,11 @@
   font-family: Roboto, sans-serif;;
 }
 
+div{
+  background-color: inherit;
+  color: inherit;
+}
+
 .title{
   text-align: center;
   font-size: 380%;
@@ -15,6 +20,8 @@ label{
 
 #image_logo{
   width: 43px;
+  background-color: white;
+  color: #ff1744;
 }
 
 h2{
@@ -23,9 +30,9 @@ h2{
 
 #login_div{
   position: relative;
-  left: 15%;
-  width: 70%;
-  height: 100%;
+  width: 100%;
+  background-color: white;
+  color: #ff1744;
 }
 
 .modal, #task-name, #task-name-label, #task-date-label, .input-field, .modal-footer, .modal-content, .modal-title{
@@ -43,6 +50,8 @@ h2{
 }
 
 h3{
+  background-color: inherit;
+  color: inherit;
   font-size: 120%;
 }
 
@@ -50,6 +59,53 @@ h4{
   font-size: 85%;
 }
 
-#test23{
+#taskname{
+  background-color: inherit;
+  color: inherit;
   font-size: 150%;
+}
+
+#facebook-login{
+  width: 100%;
+  background-color: #3b5998;
+  height: 50px;
+  text-align: center;
+  margin: auto;
+}
+
+#google-login{
+  width: 100%;
+  background-color: #1976d2;
+  height: 50px;
+  text-align: center;
+}
+
+text{
+  background-color: inherit;
+}
+
+hr.login-hr{
+  width: 45%;
+  border: 1px solid #ff1744;
+  display: inline-block;
+}
+
+.text-login{
+  font-weight: bold;
+  position: relative;
+  bottom:4px;
+  background-color: inherit;
+  color: #ff1744;
+}
+
+.white-card{
+  margin: -10px;
+  height: 85px;
+  background-color: white;
+  color: #ff1744;
+}
+
+input, label, p, h4, i{
+  background-color: inherit;
+  color: inherit;
 }

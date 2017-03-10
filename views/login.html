@@ -8,11 +8,32 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
         <link rel="stylesheet" href='main.css'>
+
     </head>
-    <body>
-        <div class='container row'>
-            <div id='login_div' class="col s12 m12 l12">
-                <h1 class='title'><img id='image_logo' src='dolt_logo.svg'>Dolt</h1>
+    <body class="valign-wrapper" style="height: 100%; width: 100%;">
+        <div class="row valign center-align" style="width: 100%;">
+            <div class="col s0 m4"></div>
+            <div class="col s12 m4" >
+                <div class="card-panel">
+                    <div class='container row'>
+                        <div id='login_div' class="col s12 m12 l12" style="background-color: white;">
+                            <h1 class='title' style="background-color: white;"><span style="background-color: white; color: #ff1744;">Dolt</h1>
+                        </div>
+                    </div>
+                    <div>
+                        <a id='facebook-login' class="waves-effect waves-light btn-large" onclick="window.location.href='/login/facebook'">
+                        <img src='fb-ico.png' style="background-color: white; max-height: 50px; position: absolute; left: 0px; z-index: 1;">
+                        Sign in with Facebook</a>
+                    </div>
+                    <br><br><br>
+                    <text><hr class="login-hr">​<span class="text-login"> or </span><hr class="login-hr"></text>
+                    <br><br><br>
+                    <div>
+                        <a id='google-login' class="waves-effect waves-light btn-large" onclick="window.location.href='/login/google'">
+                        <img src='google-ico.jpeg' style="background-color: white; max-height: 50px; position: absolute; left: 0px; z-index: 1;">
+                        Sign in with Google</a>
+                    </div>   
+                </div>
             </div>
         </div>
     </body>
