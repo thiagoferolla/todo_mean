@@ -99,7 +99,7 @@ hr.login-hr{
 }
 
 .white-card{
-  margin: -10px;
+  margin: -9px;
   height: 85px;
   background-color: white;
   color: #ff1744;
@@ -108,4 +108,10 @@ hr.login-hr{
 input, label, p, h4, i{
   background-color: inherit;
   color: inherit;
+}
+
+.modal-title{
+  font-size: 150%;
+  position: relative;
+  left: 23px;
 }

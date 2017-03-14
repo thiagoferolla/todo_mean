@@ -3,6 +3,7 @@
     <link rel="icon" href="dolt_logo.png" />
     <title>Dolt</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+     <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -17,14 +18,16 @@
       </div>
     </div>
     <div class='container row' ng-controller="tasks">
+
       <div id='pendentes'>
         <h2> Tarefas Pendentes <a href='#modal1'><i class="material-icons" style="color: white;">add</i></a><hr></h2>
         <div class='tasklist row' >
-            <div ng-repeat="task in pendingtasks" class="col s12 m12">
+            <div ng-repeat="task in pendingtasks" class="col s12 m6">
               <div class="card white-card">    
                 <div>
                   <input ng-click="complete(task)" type="checkbox" id={{task._id}} ng/>
                   <label for={{task._id}} class="task-label"><span id='taskname'>{{task.name}}</span></label>
+                  <i class="material-icons" ng-click="edit(task)" style = "cursor: pointer">mode_edit</i>
                   <i class="material-icons" ng-click="delete(task)" style="cursor: pointer;">delete</i>
                 </div>
                 <div>
@@ -33,12 +36,10 @@
               </div>
             </div>
         </div>
-        <modal id="modaltest" title="TestandooModal"></modal>
-<!-- Modal Structure
-        <div id="modal1" class="modal" ng-controller="modal" style='overflow-x: hidden'>
+<!-- Modal Structure-->
+        <modal title="Nova Tarefa">
+          <div ng-controller="modal">
           <form id='newtaskform' method="POST" style='background-color: white' ng-submit="submitForm()">
-            <div class="modal-content row">
-              <h4 class='modal-title'>Adicionar Tarefa</h4>
               <div class="input-field col s12">
                 <input id='task-name' type='text' class='validate' name='taskName' ng-model="task.name">
                 <label id="task-name-label" for="task-name">Tarefa</label>
@@ -47,23 +48,25 @@
                 <input id='task-date' type="text" placeholder="dd/mm/aaaa" class='validate' name='taskDate' ng-model="task.date">
                 <label id="task-date-label" for="task-date">Data</label>
               </div>
-          </div>
             <div class="modal-footer" style='background-color: white'>
-              <button id='btn-cadastrar' class="btn waves-effect waves-light modal-close" type="submit">Adicionar
+              <button id='btn-cadastrar' class="btn waves-effect waves-light modal-close" type="submit" onclick="document.getElementById('newtaskform').reset()">Adicionar
                 <i class="material-icons right">send</i>
               </button>
             </div>
           </form>
-        </div>
+          </div>
+        </modal>
           
- End of Modal-->
+ <!--End of Modal-->
 
       <div id='completados'>
         <h2> Tarefas Completadas<hr></h2>
           <div class="tasklist row">
-            <div ng-repeat="task in completedtasks" class="col s12 m12">
+            <div ng-repeat="task in completedtasks" class="col s12 m6">
               <div class="card white-card">
                 <h3 id="taskname">{{task.name}}</h3>
+                <i class="material-icons" ng-click="edit(task)" style = "cursor: pointer">mode_edit</i>
+                <i class="material-icons" ng-click="delete(task)" style="cursor: pointer;">delete</i>
               </div>
             </div>
           </div>

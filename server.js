@@ -1,5 +1,6 @@
 var express = require('express');
 const app = express();
+var http = require('http').Server(app);
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
@@ -10,6 +11,7 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var flash    = require('connect-flash');
 var bodyParser = require('body-parser');
+var io = require('socket.io')(http);
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
@@ -42,13 +44,11 @@ var tasks = mongoose.model('tasks', Task);
 
 
 passport.serializeUser(function(user, done) {
-    console.log('serializing user: ');console.log(user);
     done(null, user._id);
 });
 
 passport.deserializeUser(function(id, done) {
     users.findById(id, function(err, user) {
-        console.log('deserializing user:',user);
         done(err, user);
     });
 });
@@ -115,9 +115,10 @@ passport.use(new GoogleStrategy({
 
 mongoose.connect('mongodb://thiago:12345@ds161059.mlab.com:61059/dolt_data',function(err){
     if (err) return console.log(err)
-    app.listen(3000, function(){
+    const server = http.listen(3000, function(){
         console.log('listening 3000');
     })
+
 });
 
 function isLoggedIn(req, res, next) {
@@ -134,7 +135,8 @@ app.get('/login', (req,res)=>{
 app.post('/api/newtask', (req,res)=>{
     var task = new tasks({user:req.user._id ,name:req.body.name, date:req.body.date, completed:false}).save(function(err){
         if (err) throw err;
-        console.log('task saved'); 
+        console.log('task saved');
+        io.emit('message','update');
     });
 })
 
@@ -150,7 +152,6 @@ app.get('/login/facebook/callback',
 );
 
 app.get('/', isLoggedIn,function(req, res){
-    console.log(req.user)
     res.sendFile(__dirname+'/views/index.html');
 })
 
@@ -213,3 +214,13 @@ app.delete('/api/deletetasks/:id', function(req, res){
     });
 
 })
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('post', function(){
+      io.emit('post', 'update');
+  });
+  socket.on('put', function(){
+      io.emit('put', 'update');
+  })
+});

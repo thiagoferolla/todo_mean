@@ -1,4 +1,6 @@
 var app = angular.module('myApp', []);
+
+
 app.controller('tasks', function($scope, $http, $interval){
   $interval(function(){
     $scope.$applyAsync($http.get('/api/pendingtasks').then(function(data){
@@ -61,9 +63,16 @@ app.directive('modal', function(){
   transclude: true,
   scope: {title:'@title'},
   template: "<div id='modal1' class='modal' style='overflow-x: hidden'>"+
+            "<br>"+ 
             "<h4 class='modal-title'>{{title}}</h4>"+
             "<div class='modal-content row' ng-transclude>"+
             "</div></div>",
   replace: true}
 });
 
+$(function(){
+  var socket = io();
+  socket.on('message', function(msg){
+    console.log(msg);
+  })
+})
