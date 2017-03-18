@@ -84,6 +84,11 @@ text{
   background-color: inherit;
 }
 
+#btn-cadastrar{
+  position: relative;
+  left:35%;
+  top:25px;
+}
 hr.login-hr{
   width: 45%;
   border: 1px solid #ff1744;
@@ -99,7 +104,6 @@ hr.login-hr{
 }
 
 .white-card{
-  margin: -9px;
   height: 85px;
   background-color: white;
   color: #ff1744;
@@ -114,4 +118,8 @@ input, label, p, h4, i{
   font-size: 150%;
   position: relative;
   left: 23px;
+}
+
+#completedcard{
+  margin: auto;
 }

@@ -1,21 +1,44 @@
 var app = angular.module('myApp', []);
 
-
 app.controller('tasks', function($scope, $http, $interval){
-  $interval(function(){
-    $scope.$applyAsync($http.get('/api/pendingtasks').then(function(data){
-    $scope.pendingtasks = data.data
-  }));
-    $scope.$applyAsync($http.get('/api/completedtasks').then(function(data){
-      $scope.completedtasks = data.data
-    }))
-  },  1,1);
+  $scope.pendingtasks = {};
+  $scope.completedtasks = {};  
+  $interval(updateTasks ,1000, 4);
+
+  function updateTasks(){
+    $http.get('/api/pendingtasks').then(function(data){
+      if (equa_tasks($scope.pendingtasks, data.data)==false){
+        console.log(data.data[0]);
+        $scope.pendingtasks = data.data  
+      }
+    });
+
+    $http.get('/api/completedtasks').then(function(data){
+      if (equa_tasks($scope.completedtasks, data.data)==false){
+        $scope.completedtasks = data.data  
+      }
+    })}; 
+
+  function equa_tasks(oldtask, newtask){
+    if (oldtask.length!=newtask.length){
+      return (false);
+    }
+    for (i=0; i<oldtask.length; i++){
+      if (oldtask[i]._id != newtask[i]._id){
+        console.log(oldtask[0]._id);
+        console.log(newtask[0]._id)
+        return(false);}
+    }
+    return (true);
+  }
 
   $scope.complete = function(Task){
     $http.put('api/tasks',{id:Task._id, completed: true})
+    updateTasks();
   };
   $scope.delete = function(Task){
     $http.delete('api/deletetasks/'+Task._id);
+    updateTasks();
   };
 
 })
@@ -24,10 +47,6 @@ $(document).ready(function(){
   $('.modal').modal();
 });
 
-$('#btn-cadastrar').click(function(){
-  console.log('funcionou');
-  document.getElementById("newtaskform").reset();
-})
 
 function newtask(){
   document.getElementById('newtaskform').reset();
@@ -44,25 +63,17 @@ app.controller('modal', function($scope, $http){
       console.log(true);
     }).error(function(err){
       console.log(err);
-    })}})
+    });
+    }})
 
 
-app.directive('teste', function(){
-  return {restrict: 'E',
-  transclude: true,
-  scope: {title:'@title'},
-  template:'<div class="panel">' +
-            '<h6><strong>{{title}}</strong></h6>' +
-            '<div class="panel-content" ng-transclude></div>' +
-            '</div>',
-  replace: true}
-});
+
 
 app.directive('modal', function(){
   return {restrict: 'E',
   transclude: true,
   scope: {title:'@title'},
-  template: "<div id='modal1' class='modal' style='overflow-x: hidden'>"+
+  template: "<div class='modal' style='overflow-x: hidden'>"+
             "<br>"+ 
             "<h4 class='modal-title'>{{title}}</h4>"+
             "<div class='modal-content row' ng-transclude>"+
@@ -70,9 +81,26 @@ app.directive('modal', function(){
   replace: true}
 });
 
-$(function(){
-  var socket = io();
-  socket.on('message', function(msg){
-    console.log(msg);
-  })
-})
+app.directive('editmodal', function(){
+  return {restrict: 'E',
+  transclude: false,
+  scope: {name:'@name', date:'@date'},
+  template:
+          '<form id="editform" method="PUT" style="background-color: white" ng-submit="editForm()">'+
+            '<p>{{task._id}}</p>'+
+              '<div class="input-field col s12">'+
+                '<input id="task-name" type="text" class="validate" name="taskName" value={{name}}>'+
+                '<label id="task-name-label" for="task-name">Tarefa</label>'+
+              '</div>'+
+              '<div class="input-field col s12 m6">'+
+                '<input id="task-date" type="text" placeholder="dd/mm/aaaa" class="validate" name="taskDate" value={{date}}>'+
+                '<label id="task-date-label" for="task-date">Data</label>'+
+              '</div>'+
+            '<div class="col s12 m6">'+
+              '<button id="btn-cadastrar" class="btn waves-effect waves-light modal-close" type="submit" onclick="document.getElementById("editform").reset()">Enviar'+
+                '<i class="material-icons right">send</i>'+
+              '</button>'+
+            '</div>'+
+          '</form>',    
+  replace: true}
+});

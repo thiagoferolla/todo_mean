@@ -1,6 +1,5 @@
 var express = require('express');
 const app = express();
-var http = require('http').Server(app);
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
@@ -11,7 +10,6 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var flash    = require('connect-flash');
 var bodyParser = require('body-parser');
-var io = require('socket.io')(http);
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
@@ -115,7 +113,7 @@ passport.use(new GoogleStrategy({
 
 mongoose.connect('mongodb://thiago:12345@ds161059.mlab.com:61059/dolt_data',function(err){
     if (err) return console.log(err)
-    const server = http.listen(3000, function(){
+    const server = app.listen(3000, function(){
         console.log('listening 3000');
     })
 
@@ -124,7 +122,6 @@ mongoose.connect('mongodb://thiago:12345@ds161059.mlab.com:61059/dolt_data',func
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
-
     res.redirect('/login');
 }
 
@@ -136,7 +133,6 @@ app.post('/api/newtask', (req,res)=>{
     var task = new tasks({user:req.user._id ,name:req.body.name, date:req.body.date, completed:false}).save(function(err){
         if (err) throw err;
         console.log('task saved');
-        io.emit('message','update');
     });
 })
 
@@ -175,9 +171,9 @@ app.get('/api/pendingtasks', function(req, res){
     tasks.find({'user':req.user._id, 'completed':false},'_id name date').limit(5).sort({date: 1}).exec(function(err, task){
         if (err)
             throw (err)
-        return res.end(JSON.stringify(task))
-    })
-});
+        return res.end(JSON.stringify(task));
+    });
+;});
 
 app.get('/api/completedtasks', function(req, res){
     tasks.find({'user':req.user._id, 'completed':true},'_id name date').limit(5).sort({date: 1}).exec(function(err, task){
@@ -203,7 +199,7 @@ app.put('/api/tasks', function(req,res){
                 }
             })
         }
-    })
+    });
 })
 
 app.delete('/api/deletetasks/:id', function(req, res){
@@ -212,15 +208,4 @@ app.delete('/api/deletetasks/:id', function(req, res){
         if (err) return console.log(err)
         console.log("task deleted");
     });
-
 })
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('post', function(){
-      io.emit('post', 'update');
-  });
-  socket.on('put', function(){
-      io.emit('put', 'update');
-  })
-});
