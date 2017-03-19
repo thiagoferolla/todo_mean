@@ -1,5 +1,5 @@
 *, #btn-cadastrar{
-  background-color: #ff1744;
+  background-color: blue;
   color: white;
   font-family: Roboto, sans-serif;;
 }
@@ -122,8 +122,7 @@ input, label, p, h4, i{
 
 #completedcard{
   margin: auto;
-  position: relative;
-  top:-2%;
+  position: fixed;
 }
 
 img.rounded{
