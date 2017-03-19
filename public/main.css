@@ -135,9 +135,3 @@ img.rounded{
   position: fixed;
   top:6%;
 }
-
-.preloader-wrapper{
-  width: 100%;
-  height: 100%;
-  background-color: white;
-}
