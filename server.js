@@ -10,6 +10,7 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var flash    = require('connect-flash');
 var bodyParser = require('body-parser');
+var port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
@@ -25,6 +26,7 @@ app.use(bodyParser.json())
 var User = new Schema({
     provider: String,
     providerUserId: String,
+    picture: String,
     accesstoken: String,
     name:String,
     email:{type: String, required:true},
@@ -55,7 +57,7 @@ passport.use('facebook', new FacebookStrategy({
   clientID        : "830259470446804",
   clientSecret    : "413d3c3f5bc723a013a6db18791fc6e3",
   callbackURL     : "http://localhost:3000/login/facebook/callback",
-  profileFields: ['id', 'email', 'displayName']
+  profileFields: ['id', 'email', 'displayName', 'photos']
 },
   function(access_token, refresh_token, profile, done) {
     process.nextTick(function() {
@@ -63,11 +65,15 @@ passport.use('facebook', new FacebookStrategy({
         if (err)
           return done(err);
           if (user) {
+              user.picture = profile.photos[0].value;
+              user.name = profile.displayName;
+              user.save()
             return done(null, user);
           } else {
             var newUser = new users();
             newUser.provider = "facebook";
             newUser.providerUserId = profile.id;
+            newUser.picture = profile.photos[0].value;
             newUser.access_token = access_token;            
             newUser.name  = profile.displayName;
             newUser.email = profile.emails[0].value;
@@ -113,8 +119,8 @@ passport.use(new GoogleStrategy({
 
 mongoose.connect('mongodb://thiago:12345@ds161059.mlab.com:61059/dolt_data',function(err){
     if (err) return console.log(err)
-    const server = app.listen(3000, function(){
-        console.log('listening 3000');
+    const server = app.listen(port, function(){
+        console.log('listening '+port);
     })
 
 });
@@ -125,7 +131,7 @@ function isLoggedIn(req, res, next) {
     res.redirect('/login');
 }
 
-app.get('/login', (req,res)=>{
+app.get('/login',(req,res)=>{
   res.sendFile(__dirname+'/views/login.html');
 })
 
@@ -203,9 +209,15 @@ app.put('/api/tasks', function(req,res){
 })
 
 app.delete('/api/deletetasks/:id', function(req, res){
-    console.log(true)
+    console.log(true);
     tasks.findOneAndRemove({_id:req.params.id}).then(function(err){
         if (err) return console.log(err)
         console.log("task deleted");
     });
+});
+
+app.get('/api/user', function (req, res){
+    users.findOne({_id:req.user._id}).exec(function(err, usuario){
+        res.end(JSON.stringify(usuario));
+    })
 })

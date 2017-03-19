@@ -123,3 +123,12 @@ input, label, p, h4, i{
 #completedcard{
   margin: auto;
 }
+
+img.rounded{
+  border-radius: 50%;
+}
+
+#profile-pic{
+  position: fixed;
+  top:6%;
+}

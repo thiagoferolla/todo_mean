@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class='container row' ng-controller="tasks">
-
+      <a href="/logout"><img class="rounded" id="profile-pic" src={{user.data.picture}}></a>
       <div id='pendentes'>
         <h2> Tarefas Pendentes <a href='#modal1'><i class="material-icons" style="color: white;">add</i></a><hr></h2>
         <div class='tasklist row' >
@@ -61,7 +61,7 @@
           </form>
           </div>
         </modal>
-        
+
  <!--End of Modal-->
 
       <div id='completadps'>

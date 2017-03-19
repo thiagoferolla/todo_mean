@@ -5,6 +5,10 @@ app.controller('tasks', function($scope, $http, $interval){
   $scope.completedtasks = {};  
   $interval(updateTasks ,1000, 4);
 
+  $http.get('/api/user').then(function(data){
+    $scope.user = data;
+  })
+
   function updateTasks(){
     $http.get('/api/pendingtasks').then(function(data){
       if (equa_tasks($scope.pendingtasks, data.data)==false){
@@ -25,8 +29,6 @@ app.controller('tasks', function($scope, $http, $interval){
     }
     for (i=0; i<oldtask.length; i++){
       if (oldtask[i]._id != newtask[i]._id){
-        console.log(oldtask[0]._id);
-        console.log(newtask[0]._id)
         return(false);}
     }
     return (true);
@@ -90,11 +92,11 @@ app.directive('editmodal', function(){
             '<p>{{task._id}}</p>'+
               '<div class="input-field col s12">'+
                 '<input id="task-name" type="text" class="validate" name="taskName" value={{name}}>'+
-                '<label id="task-name-label" for="task-name">Tarefa</label>'+
+                '<label id="task-name-label" for="task-name" class="active">Tarefa</label>'+
               '</div>'+
               '<div class="input-field col s12 m6">'+
                 '<input id="task-date" type="text" placeholder="dd/mm/aaaa" class="validate" name="taskDate" value={{date}}>'+
-                '<label id="task-date-label" for="task-date">Data</label>'+
+                '<label id="task-date-label" for="task-date" class="active">Data</label>'+
               '</div>'+
             '<div class="col s12 m6">'+
               '<button id="btn-cadastrar" class="btn waves-effect waves-light modal-close" type="submit" onclick="document.getElementById("editform").reset()">Enviar'+
