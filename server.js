@@ -56,7 +56,7 @@ passport.deserializeUser(function(id, done) {
 passport.use('facebook', new FacebookStrategy({
   clientID        : "830259470446804",
   clientSecret    : "413d3c3f5bc723a013a6db18791fc6e3",
-  callbackURL     : "http://localhost:3000/login/facebook/callback",
+  callbackURL     : "https://dolt.herokuapp.com/login/facebook/callback",
   profileFields: ['id', 'email', 'displayName', 'photos']
 },
   function(access_token, refresh_token, profile, done) {
@@ -91,7 +91,7 @@ passport.use('facebook', new FacebookStrategy({
 passport.use(new GoogleStrategy({
     clientID  : "704799159103-kt6c8f06hc0ga6a65ulbcq9pp5p48g2v.apps.googleusercontent.com",
     clientSecret  : "347uh9K5dh4aSt9X2YJry-9N",
-    callbackURL  : "http://localhost:3000/login/google/callback"
+    callbackURL  : "https://dolt.herokuapp.com/login/google/callback"
 }, function(access_token, refresh_token, profile, done){
     process.nextTick(function(){
         users.findOne({'providerUserId': profile.id}, function(err, user){
