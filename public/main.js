@@ -3,7 +3,7 @@ var app = angular.module('myApp', []);
 app.controller('tasks', function($scope, $http, $interval){
   $scope.pendingtasks = {};
   $scope.completedtasks = {};  
-  $interval(updateTasks ,1000, 4);
+  $interval(updateTasks ,10000, 4);
 
   $http.get('/api/user').then(function(data){
     $scope.user = data;
