@@ -70,7 +70,8 @@ h4{
   background-color: #3b5998;
   height: 50px;
   text-align: center;
-  margin: auto;
+  margin-bottom: 50px;
+  margin-top: 50px;
 }
 
 #google-login{
@@ -78,6 +79,7 @@ h4{
   background-color: #1976d2;
   height: 50px;
   text-align: center;
+  margin-top: 50px;
 }
 
 text{
@@ -133,3 +135,4 @@ img.rounded{
   position: fixed;
   top:6%;
 }
+
