@@ -121,7 +121,8 @@ input, label, p, h4, i{
 }
 
 #completedcard{
-  margin: 0px;
+  margin: auto;
+  position: fixed;
 }
 
 img.rounded{
