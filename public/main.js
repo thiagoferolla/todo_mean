@@ -1,8 +1,6 @@
 var app = angular.module('myApp', []);
 
-app.controller('tasks', function($scope, $http, $interval){
-  $scope.pendingtasks = {};
-  $scope.completedtasks = {};  
+app.controller('tasks', function($scope, $http, $interval){ 
   $interval(updateTasks ,1000, 4);
 
   $http.get('/api/user').then(function(data){
@@ -106,3 +104,22 @@ app.directive('editmodal', function(){
           '</form>',    
   replace: true}
 });
+
+app.directive('loader', function(){
+  return {restrict:'E',
+  transclude: false,
+  template:
+    '<div class="preloader-wrapper big active">'+
+      '<div class="spinner-layer spinner-blue-only">'+
+        '<div class="circle-clipper left">'+
+          '<div class="circle"></div>'+
+        '</div><div class="gap-patch">'+
+          '<div class="circle"></div>'+
+        '</div><div class="circle-clipper right">'+
+          '<div class="circle"></div>'+
+        '</div>'+
+      '</div>'+
+    '</div>',
+  replace: true
+  }
+})
