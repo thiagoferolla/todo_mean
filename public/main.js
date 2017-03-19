@@ -111,7 +111,7 @@ app.directive('loader', function(){
   return {restrict:'E',
   transclude: false,
   template:
-    '<div class="preloader-wrapper big active">'+
+    '<div class="preloader-wrapper big active" style="width: 100%; height:100%; background-color: white;">'+
       '<div class="spinner-layer spinner-blue-only">'+
         '<div class="circle-clipper left">'+
           '<div class="circle"></div>'+
