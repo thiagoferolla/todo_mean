@@ -50,7 +50,11 @@ app.controller('tasks', function($scope, $http, $interval){
 
 $(document).ready(function(){
   $('.modal').modal();
-  $(".button-collapse").sideNav();
+  $(".button-collapse").sideNav({
+    menuWidth:300,
+    closeOnClick: true,
+    draggable:true
+  });
 });
 
 
