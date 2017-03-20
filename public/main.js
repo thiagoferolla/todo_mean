@@ -107,3 +107,7 @@ app.directive('editmodal', function(){
           '</form>',    
   replace: true}
 });
+
+function sidenav() {
+  $('.button-collapse').sideNav('show');
+}
