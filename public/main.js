@@ -49,7 +49,7 @@ $(document).ready(function(){
   $('.modal').modal();
     $('.button-collapse').sideNav({
       menuWidth: 300,
-      edge: 'right',
+      edge: 'left',
       closeOnClick: true,
       draggable: true 
     }
