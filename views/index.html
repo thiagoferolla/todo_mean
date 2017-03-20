@@ -13,14 +13,17 @@
   </head>
   <body>
 
-      <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo center" style="color: #ff1744;">Dolt</a>
-          <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li><i id="menu" class='material-icons'>menu</i></li>
-          </ul>
-        </div>
-      </nav>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo center" style="color: #ff1744;">Dolt</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><i data-activates="slide-out" id="menu" class='material-icons'>menu</i></li>
+        </ul>
+      </div>
+    </nav>
+
+    <ul id="slide-out" class="side-nav">
+    </ul>
 
     <div class='container row' ng-controller="tasks">
       <div id='pendentes'>
