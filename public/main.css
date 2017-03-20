@@ -140,3 +140,8 @@ nav, .nav-wrapper, .brand-logo, li{
   background-color: white;
   color: #ff1744;
 }
+
+#menu{
+  position: relative;
+  left: 20px;
+}
