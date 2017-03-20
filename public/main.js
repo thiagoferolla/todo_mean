@@ -2,14 +2,10 @@ var app = angular.module('myApp', []);
 
 app.controller('tasks', function($scope, $http, $interval){
   $http.get('/api/pendingtasks').then(function(data){
-      if (equa_tasks($scope.pendingtasks, data.data)==false){
         $scope.pendingtasks = data.data  
-      }
     });
     $http.get('/api/completedtasks').then(function(data){
-      if (equa_tasks($scope.completedtasks, data.data)==false){
         $scope.completedtasks = data.data  
-      }
     })
   $interval(updateTasks ,10000, 4);
 
@@ -54,7 +50,7 @@ app.controller('tasks', function($scope, $http, $interval){
 
 $(document).ready(function(){
   $('.modal').modal();
-  $('.button-collapse').sideNav();
+  $('#slide-btn').sideNav();
 });
 
 
