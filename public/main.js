@@ -51,7 +51,7 @@ app.controller('tasks', function($scope, $http, $interval){
 $(document).ready(function(){
   $('.modal').modal();
   $('a').sideNav({
-    menuWidth:300,
+    menuWidth:500,
     closeOnClick: true,
     draggable:true
   });
