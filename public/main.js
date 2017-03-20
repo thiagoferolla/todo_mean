@@ -1,8 +1,16 @@
 var app = angular.module('myApp', []);
 
 app.controller('tasks', function($scope, $http, $interval){
-  $scope.pendingtasks = {};
-  $scope.completedtasks = {};  
+  $http.get('/api/pendingtasks').then(function(data){
+      if (equa_tasks($scope.pendingtasks, data.data)==false){
+        $scope.pendingtasks = data.data  
+      }
+    });
+    $http.get('/api/completedtasks').then(function(data){
+      if (equa_tasks($scope.completedtasks, data.data)==false){
+        $scope.completedtasks = data.data  
+      }
+    })
   $interval(updateTasks ,10000, 4);
 
   $http.get('/api/user').then(function(data){
@@ -12,7 +20,6 @@ app.controller('tasks', function($scope, $http, $interval){
   function updateTasks(){
     $http.get('/api/pendingtasks').then(function(data){
       if (equa_tasks($scope.pendingtasks, data.data)==false){
-        console.log(data.data[0]);
         $scope.pendingtasks = data.data  
       }
     });
