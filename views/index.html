@@ -11,11 +11,9 @@
     <link rel="stylesheet" href='main.css'>
     <script src='main.js'></script>
   </head>
-  <body>
+  <body  ng-controller="tasks">
 
     <nav>
-      <p>{{user}}</p>
-      <img src="{{user.picture}}">
       <div class="nav-wrapper">
         <a href="#" class="brand-logo center" style="color: #ff1744;">Dolt</a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
@@ -28,7 +26,7 @@
       <li><img class="rounded" src="{{user.picture}}"></li>
     </ul>
 
-    <div class='container row' ng-controller="tasks">
+    <div class='container row'>
       <div id='pendentes'>
         <h2> Tarefas Pendentes <a href='#modal1'><i class="material-icons" style="color: white;">add</i></a><hr></h2>
         <div class='tasklist row' >
