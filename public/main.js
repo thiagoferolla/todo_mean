@@ -50,7 +50,7 @@ app.controller('tasks', function($scope, $http, $interval){
 
 $(document).ready(function(){
   $('.modal').modal();
-  $('.side-nav').sideNav();
+  $('.button-collapse').sideNav();
 });
 
 
