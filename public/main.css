@@ -140,5 +140,6 @@ img.rounded{
 nav, .nav-wrapper, .brand-logo, li{
   background-color: white;
   color: #ff1744;
+  width: 100%;
 }
 
