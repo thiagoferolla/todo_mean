@@ -52,7 +52,7 @@ $(document).ready(function(){
   $('.modal').modal();
   $('a.brand-logo').sideNav({
     menuWidth:500,
-    edge:right,
+    edge:"right",
     closeOnClick: true,
     draggable:true
   });
