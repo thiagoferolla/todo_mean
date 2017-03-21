@@ -50,7 +50,7 @@ app.controller('tasks', function($scope, $http, $interval){
 
 $(document).ready(function(){
   $('.modal').modal();
-  $('.button-collapse').sideNav({
+  $('a.brand-logo').sideNav({
     menuWidth:500,
     closeOnClick: true,
     draggable:true
