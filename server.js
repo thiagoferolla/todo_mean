@@ -54,8 +54,8 @@ passport.deserializeUser(function(id, done) {
 });
 
 passport.use('facebook', new FacebookStrategy({
-  clientID        : "830259470446804",
-  clientSecret    : "413d3c3f5bc723a013a6db18791fc6e3",
+  clientID        : "",
+  clientSecret    : "",
   callbackURL     : "https://dolt.herokuapp.com/login/facebook/callback",
   profileFields: ['id', 'email', 'displayName', 'photos']
 },
@@ -89,8 +89,8 @@ passport.use('facebook', new FacebookStrategy({
 }));
 
 passport.use(new GoogleStrategy({
-    clientID  : "704799159103-kt6c8f06hc0ga6a65ulbcq9pp5p48g2v.apps.googleusercontent.com",
-    clientSecret  : "347uh9K5dh4aSt9X2YJry-9N",
+    clientID  : "",
+    clientSecret  : "",
     callbackURL  : "https://dolt.herokuapp.com/login/google/callback"
 }, function(access_token, refresh_token, profile, done){
     process.nextTick(function(){
@@ -117,7 +117,7 @@ passport.use(new GoogleStrategy({
     })
 }) )
 
-mongoose.connect('mongodb://thiago:12345@ds161059.mlab.com:61059/dolt_data',function(err){
+mongoose.connect('',function(err){
     if (err) return console.log(err)
     const server = app.listen(port, function(){
         console.log('listening '+port);
